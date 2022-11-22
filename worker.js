@@ -17,7 +17,7 @@ async function handleRequest(request) {
   ).then(res => res.json());
   let sum = 0;
   for (let i = 0; i < apiresp.length; i++) {
-    let release = apiresp[0];
+    let release = apiresp[i];
     for (let j = 0; j < release.assets.length; j++) {
       let asset = release.assets[j];
       if (url.searchParams.get("filter") == null || asset.name.endsWith(url.searchParams.get("filter"))) {
