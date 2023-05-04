@@ -19,6 +19,9 @@ async function handleRequest(request) {
             <label for="filter">Only show files that end with: (optional)</label>
             <input id="filter"></input>
             <br>
+            <label for="text">Title: (optional)</label>
+            <input id="text"></input>
+            <br>
             <button id="button" type="button">Show image</button>
             <br>
             <img id="result">
@@ -29,6 +32,9 @@ async function handleRequest(request) {
                     url.pathname = "/" + document.getElementById("repo").value
                     if (document.getElementById("filter").value !== "") {
                         url.searchParams.set("filter", document.getElementById("filter").value);
+                    }
+                    if (document.getElementById("text").value !== "") {
+                        url.searchParams.set("text", document.getElementById("text").value);
                     }
                     document.getElementById("result").src = url.toString();
                 }
@@ -60,6 +66,6 @@ async function handleRequest(request) {
         }
       }
     }
-    return await fetch(`https://img.shields.io/badge/downloads-${sum}-green`);
+    return await fetch(`https://img.shields.io/badge/${url.searchParams.get("text") == null ? "downloads" : url.searchParams.get("text")}-${sum}-green`);
   }
 }
